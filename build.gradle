@@ -1,0 +1,15 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+}
+
+mainClassName = 'Main'
+compileJava.options.encoding = 'UTF-8'
+// Repositories and dependencies for code go here
+repositories {
+    mavenCentral()
+}

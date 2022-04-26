@@ -1,6 +1,6 @@
 # ser316-spring2022-B-olipunov-lab5
 YouTube:
-GitHub:
+GitHub: https://github.com/olipunov/ser316-spring2022-B-olipunov-lab5.git
 
 I chose Option B, where code uses Design Patterns being Intertwined 
 

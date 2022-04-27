@@ -8,6 +8,9 @@ package test.java;
 
 
 import com.sun.source.tree.NewArrayTree;
+import main.java.Battle;
+import main.java.Money;
+import main.java.Shop;
 import main.java.baselasses.Hunter;
 import main.java.baselasses.Paladin;
 import main.java.baselasses.Rouge;
@@ -33,6 +36,7 @@ public class test {
     // For Player class
     private Player current;
     private PlayerType playerType;
+    private PlayerType playerType2;
     private Hunter hunter;
     private Paladin paladin;
     private Rouge rouge;
@@ -43,6 +47,12 @@ public class test {
     private Troll troll;
     private Undead undead;
 
+    private Money money;
+
+    private Battle battle;
+
+    private Shop shop;
+
     /**
      * Condition before the test.
      * @throws Exception Throw general exception
@@ -50,6 +60,7 @@ public class test {
     @org.junit.Before
     public void beforeMethod() throws Exception {
         current = new Hunter("Oleg");
+        playerType2 = new Human(new Paladin("Oleg"));
     }
 
     /**
@@ -61,6 +72,7 @@ public class test {
     public void afterMethod() throws Exception{
         current = null;
         playerType = null;
+        playerType2= null;
 
     }
 
@@ -176,7 +188,97 @@ public class test {
         Assert.assertEquals("Vasia", current.getName());
         System.out.println(current.getAbility());
         Assert.assertNotNull(current.getAbility());
+    }
+
+    /**
+     * TEST CASE 3:  Checking player base classes making sure they are created properly and correct.
+     * @author oleg lipunov
+     */
+    @Test
+    public void testBaseUintPlayerType() {
+
+        current = new Paladin("Oleg");
+        playerType = new Troll(current);
+        System.out.println(playerType.getAgility());
+        Assert.assertEquals(3, playerType.getAgility());
+        System.out.println(playerType.getStrength());
+        Assert.assertEquals(7, playerType.getStrength());
+        System.out.println(playerType.getIntuition());
+        Assert.assertEquals(6, playerType.getIntuition());
+        System.out.println(playerType.getIntelligence());
+        Assert.assertEquals(5, playerType.getIntelligence());
+        System.out.println(playerType.getVitality());
+        Assert.assertEquals(5, playerType.getVitality());
+        System.out.println(playerType.getTypeBonus());
+        Assert.assertNull(playerType.getTypeBonus());
+        System.out.println(playerType.getType());
+        Assert.assertNull(playerType.getType());
+        System.out.println(playerType.getClassType());
+        Assert.assertEquals(null, playerType.getClassType());
+        playerType.setTypeBonus("bazooka");
+        System.out.println(playerType.getTypeBonus());
+        Assert.assertEquals("bazooka", playerType.getTypeBonus());
+        playerType.setClassType("smerch");
+        System.out.println(playerType.getClassType());
+        Assert.assertEquals("smerch", playerType.getClassType());
+        System.out.println(playerType.toString());
+        Assert.assertNotNull(playerType.toString());
+        Assert.assertNotNull(playerType.bio());
+        System.out.println(playerType.getSkill());
+        System.out.println("TestTT");
+        System.out.println(playerType.getName());
+        Assert.assertEquals(null, playerType.getName());
+        playerType.setVitality();
+        System.out.println(playerType.getVitality());
+        Assert.assertEquals(5, playerType.getVitality());
 
     }
+
+    /**
+     * Test case for money and its methods.
+     */
+    @Test
+    public void  testMoney() {
+        money = new Money();
+        Money.setMoney(100);
+        Assert.assertEquals(100, Money.getMoney());
+        Money.addMoney(100);
+        Assert.assertEquals(200, Money.getMoney());
+        Money.setMoney(Money.getMoney() - 50);
+        Assert.assertEquals(150, Money.getMoney());
+    }
+
+    /**
+     * Test case for battle singleton class.
+     */
+    @Test
+    public void testBattle()  {
+        Assert.assertNotNull(Battle.getInstance(playerType2, 10));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 1));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 2));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 3));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 4));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 5));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 6));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 7));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 8));
+        Assert.assertNotNull(Battle.getInstance(playerType2, 100));
+    }
+
+    /**
+     * Test case for Shop singleton class.
+     * We run thi stest a few times since there are many different random outcomes.
+     */
+    @Test
+    public void testShop()  {
+        Assert.assertNotNull(Shop.getShop(playerType2));
+        Assert.assertNotNull(Shop.getShop(playerType2));
+        Assert.assertNotNull(Shop.getShop(playerType2));
+        Assert.assertNotNull(Shop.getShop(playerType2));
+        Assert.assertNotNull(Shop.getShop(playerType2));
+        Assert.assertNotNull(Shop.getShop(playerType2));
+        Assert.assertNotNull(Shop.getShop(playerType2));
+    }
+
 
 }

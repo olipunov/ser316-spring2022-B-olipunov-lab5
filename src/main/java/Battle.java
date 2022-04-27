@@ -22,6 +22,7 @@ public class Battle {
     /*The main player of the rpg game */
     static Player mainPlayer;
     static Battle battle;
+    static boolean outcome = true;
 
     /**
      * Instance of the battle simulate a fight.
@@ -31,6 +32,7 @@ public class Battle {
      */
     public static Battle getInstance(Player player, int lvl) {
 
+        outcome = true;
         int enemyFacing = 1;
         double playerDmg = 5;
         playerDmg = setDmg(player.getStrength());
@@ -133,6 +135,7 @@ public class Battle {
         System.out.println("Fight Starts!");
         boolean  playerTurn = (playerDodge >= enemyDodge);
         while (true) {
+            outcome = true;
             // Calculate who goes first based  on speed/agility
             // Unit With highest speed goes first
             boolean doesCrit = false;
@@ -161,7 +164,6 @@ public class Battle {
 
                 if (percentage2 <= playerCrit - enemyCrit) {
                     System.out.println("CRIT! You deal double dmg.");
-                    doesCrit = true;
                     dmgDone *= 2;
                 }
 
@@ -197,7 +199,6 @@ public class Battle {
 
                 if (percentage2 <= enemyCrit - playerCrit) {
                     System.out.println("CRIT! Enemy deal double dmg.");
-                    doesCrit = true;
                     dmgDone *= 2;
                 }
 
@@ -216,6 +217,7 @@ public class Battle {
             if (playerHealth <= 0 || enemyHealth <= 0) {
                 if (playerHealth <= 0) {
                     System.out.println("*** You Lost ***");
+                    outcome = false;
                 } else {
                     System.out.println("*** You Wont the battle. ***");
                 }

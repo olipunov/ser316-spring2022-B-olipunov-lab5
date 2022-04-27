@@ -98,11 +98,26 @@ public class Main {
 
         int counter = 1;
         while (true) {
+
+            if (!Battle.outcome && (counter % 10 == 0)) {
+                System.out.println("You lost the battle to a boss and loose the game");
+                System.out.println("GAME OVER");
+                System.exit(1);
+            }
+
+            if (!Battle.outcome) {
+                System.out.println("You lost the battle and are returned to lvl 1");
+                counter = 1;
+            }
+
             System.out.println("\nin loop");
 
             Battle.getInstance(completePlayer, counter);
+            System.out.println("###################################################\n");
+            Shop.getShop(completePlayer);
             counter++;
-            if (counter >= 22) {
+            if (counter > 100) {
+                System.out.println("\nYou beat the final boss and finished the game!!!!");
                 break;
             }
         }

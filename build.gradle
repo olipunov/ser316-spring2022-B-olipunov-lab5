@@ -22,14 +22,14 @@ repositories {
     jcenter()
 }
 
-// In this section you declare the dependencies for your production and test code
+// In this section you declare the dependencies for your production and Test code
 dependencies{
     compile "junit:junit:4.12"
     compile files('cls/')
 
 }
-// this is for future test class location
-// test {
+// this is for future Test class location
+// Test {
 //     exclude '**/BlackBoxGiven.class'
 // }
 
